@@ -319,15 +319,45 @@ code, pre { font-family: "JetBrains Mono", ui-monospace, monospace; }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 26px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .project-card:hover { transform: translateY(-6px); border-color: var(--brand-1); }
-.project-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.project-emoji { font-size: 1.8rem; }
-.project-date { font-size: 0.78rem; color: var(--text-muted); }
+.project-image {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.project-card:hover .project-image img { transform: scale(1.06); }
+.project-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 14, 23, 0) 40%, rgba(10, 14, 23, 0.85) 100%);
+}
+.project-date {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  z-index: 1;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text);
+  background: rgba(10, 14, 23, 0.6);
+  padding: 4px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+.project-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
 .project-card h3 { margin: 0 0 10px; font-size: 1.2rem; }
 .project-card p { color: var(--text-muted); font-size: 0.92rem; margin: 0 0 16px; }
 .project-card .tag-list { margin-bottom: 20px; }
